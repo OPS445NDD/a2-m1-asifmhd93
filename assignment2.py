@@ -3,9 +3,9 @@
 '''
 OPS445 Assignment 2 - Winter 2023
 Program: assignment2.py 
-Author: "Student Name"
+Author: Asif Mohammad
 The python code in this file is original work written by
-"Student Name". No code in this file is copied from any other source 
+Asif Mohammad. No code in this file is copied from any other source 
 except those provided by the course instructor, including any person, 
 textbook, or on-line resource. I have not shared this python script 
 with anyone or anything except for submission for grading.  
@@ -14,7 +14,7 @@ violators will be reported and appropriate action will be taken.
 
 Description: <Enter your documentation here>
 
-Date: 
+Date:July 19, 2026
 
 '''
 
@@ -32,17 +32,23 @@ def parse_command_args() -> object:
 
 def percent_to_graph(percent: float, length: int=20) -> str:
     "turns a percent 0.0 - 1.0 into a bar graph"
-    pass
+    symbol_count = round(percent * length)
+    space_count = length - symbol_count
+    return '#' * symbol_count + ' ' * space_count
 
 def get_sys_mem() -> int:
     "return total system memory (used or available) in kB"
-    # open the meminfo file to do this!
-    pass
+    with open('/proc/meminfo', 'r') as meminfo:
+        for line in meminfo:
+            if line.startswith('MemTotal:'):
+                return int(line.split()[1])
 
 def get_avail_mem() -> int:
     "return total memory that is currently available"
-    # open the meminfo file to do this!
-    pass
+    with open('/proc/meminfo', 'r') as meminfo:
+        for line in meminfo:
+            if line.startswith('MemAvailable:'):
+                return int(line.split()[1])
 
 def pids_of_prog(app_name: str) -> list:
     "given an app name, return all pids associated with app"
